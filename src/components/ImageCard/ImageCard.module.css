@@ -1,0 +1,48 @@
+.image {
+  object-fit: fill;
+  width: 400px;
+  height: 200px;
+}
+.containerLike,
+.description {
+  position: relative;
+  top: -240px;
+  left: 140px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  font-weight: 600;
+  color: var(--color-black-200);
+  opacity: 0;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.description {
+  top: -140px;
+  left: 30px;
+  background-color: var(--color-white-300);
+  border-radius: 10px;
+  padding: 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.iconLike {
+  color: var(--color-green-300);
+  height: 80px;
+  width: 80px;
+  position: relative;
+  top: -180px;
+  left: 140px;
+  opacity: 0;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.image:hover + .iconLike,
+.image:hover + .iconLike + .containerLike,
+.image:hover + .iconLike + .containerLike + .description {
+  opacity: 1;
+}

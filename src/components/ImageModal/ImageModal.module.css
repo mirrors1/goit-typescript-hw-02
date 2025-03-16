@@ -1,0 +1,15 @@
+.img {
+  margin: 0 auto;
+  /* margin-bottom: 20px; */
+}
+.title {
+  padding: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  font-weight: 600;
+  color: var(--color-black-200);
+}

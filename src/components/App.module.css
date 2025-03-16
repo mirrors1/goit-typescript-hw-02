@@ -1,0 +1,11 @@
+.icon,
+.iconError {
+  width: 40px;
+  height: 40px;
+  box-sizing: content-box;
+  fill: var(--color-green);
+  transition: fill var(--transition-speed-base) ease-in-out;
+}
+.iconError {
+  fill: red;
+}
