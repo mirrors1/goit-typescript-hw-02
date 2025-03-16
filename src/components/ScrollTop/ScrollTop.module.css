@@ -1,0 +1,32 @@
+.scrollTop {
+  transition: bottom 0.4sease-in-out;
+  /* background: url(/images/scroll-top.svg) no-repeat center center; */
+  width: 48px;
+  height: 48px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 6px 0 rgba(16, 16, 16, 0.2);
+  position: fixed;
+  bottom: 73px;
+  right: 16px;
+  /* display: inline-block; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1000;
+  /* background-color: transparent; */
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+  &:hover {
+    background-color: var(--color-green);
+  }
+  &:hover :first-child {
+    color: #fff;
+  }
+}
+.icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-green);
+  transition: color 300ms ease-in-out, color 300ms ease-in-out;
+}

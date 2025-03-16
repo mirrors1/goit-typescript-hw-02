@@ -11,6 +11,7 @@ import ErrorMessage from './ErrorMessage/ErrorMessage';
 import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
 import s from './App.module.css';
 import { ImageModal } from './ImageModal/ImageModal';
+import ScrollTop from './ScrollTop/ScrollTop';
 
 function App() {
   const [images, setImages] = useState([]);
@@ -109,6 +110,7 @@ function App() {
           alt={modalAlt}
           description={modalDescription}
         />
+        <ScrollTop />
       </div>
     </>
   );
