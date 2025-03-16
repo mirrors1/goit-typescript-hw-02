@@ -3,28 +3,30 @@ import { FaRegSadCry } from 'react-icons/fa';
 import { IoSearch } from 'react-icons/io5';
 import { BiSolidError } from 'react-icons/bi';
 import toast from 'react-hot-toast';
-import SearchBar from './SearchBar/SearchBar';
-import * as imagesService from '../services/api';
-import ImageGallery from './ImageGallery/ImageGallery';
-import Loader from './Loader/Loader';
-import ErrorMessage from './ErrorMessage/ErrorMessage';
-import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
+import SearchBar from '../SearchBar/SearchBar';
+import * as imagesService from '../../services/api';
+import ImageGallery from '../ImageGallery/ImageGallery';
+import Loader from '../Loader/Loader';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 import s from './App.module.css';
-import { ImageModal } from './ImageModal/ImageModal';
-import ScrollTop from './ScrollTop/ScrollTop';
+import { ImageModal } from '../ImageModal/ImageModal';
+import ScrollTop from '../ScrollTop/ScrollTop';
+import { IImage } from '../СommonTypes/types';
 
 function App() {
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const [error, setError] = useState(false);
-  const [query, setQuery] = useState('');
-  const [page, setPage] = useState(1);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [modalSrc, setModalSrc] = useState('');
-  const [modalAlt, setModalAlt] = useState('');
-  const [modalDescription, setModalDescription] = useState('');
+  const [images, setImages] = useState<IImage[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isEmpty, setIsEmpty] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
+  // const [error, setError] = useState<string>(false);
+  const [query, setQuery] = useState<string>('');
+  const [page, setPage] = useState<number>(1);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [modalSrc, setModalSrc] = useState<string>('');
+  const [modalAlt, setModalAlt] = useState<string>('');
+  const [modalDescription, setModalDescription] = useState<string>('');
 
   useEffect(() => {
     if (!query) return;
@@ -42,8 +44,10 @@ function App() {
 
         setImages(prev => [...prev, ...results]);
         setIsVisible(page < total_pages);
-      } catch (error) {
-        setError(error.message);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError(error.message);
+        }
       } finally {
         setIsLoading(false);
       }
@@ -51,24 +55,30 @@ function App() {
     getData();
   }, [query, page]);
 
-  const handleSetQuery = newQuery => {
+  const handleSetQuery = (newQuery: string) => {
     setQuery(newQuery);
     setImages([]);
     setIsEmpty(false);
     setIsVisible(false);
     setPage(1);
-    setError(null);
+    setError('');
+    // setError(null);
   };
-  const onLoadMore = () => {
+  const onLoadMore = (): void => {
     setPage(perPage => perPage + 1);
   };
-  const openModal = (src, alt, description) => {
+
+  const openModal = (
+    src: string,
+    alt: string | '',
+    description: string | ''
+  ): void => {
     setModalIsOpen(true);
     setModalSrc(src);
     setModalAlt(alt);
     setModalDescription(description);
   };
-  const closeModal = () => {
+  const closeModal = (): void => {
     setModalIsOpen(false);
     setModalSrc('');
     setModalAlt('');
@@ -79,7 +89,7 @@ function App() {
       {!modalIsOpen && <SearchBar onSearch={handleSetQuery} />}
       <div className="container">
         {!images.length && !isEmpty && (
-          <ErrorMessage>
+          <ErrorMessage textAlign="center" marginBottom="0">
             Пошук підтримує українську мову. Тож почнемо пошуки
             <IoSearch className={s.icon} />
           </ErrorMessage>
@@ -94,12 +104,12 @@ function App() {
           </LoadMoreBtn>
         )}
         {error && (
-          <ErrorMessage>
+          <ErrorMessage textAlign="center" marginBottom="0">
             <BiSolidError className={s.iconError} /> Щось пішло не так - {error}
           </ErrorMessage>
         )}
         {isEmpty && (
-          <ErrorMessage>
+          <ErrorMessage textAlign="center" marginBottom="0">
             Вибач. Я не знайшов зображень ... <FaRegSadCry className={s.icon} />
           </ErrorMessage>
         )}

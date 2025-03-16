@@ -1,12 +1,16 @@
 import { IoSearch } from 'react-icons/io5';
+import { FC, FormEvent } from 'react';
 import s from './SearchBar.module.css';
 import toast from 'react-hot-toast';
+import { ISearchBarProps } from './SearchBar.types';
 
-const SearchBar = ({ onSearch }) => {
-  const handleSubmit = evt => {
+const SearchBar: FC<ISearchBarProps> = ({ onSearch }) => {
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
-    const form = evt.target;
-    const search = form.elements.search.value;
+
+    const form = evt.target as HTMLFormElement;
+    const formElements = form.elements as any;
+    const search = formElements.search.value;
 
     // Якщо текстове поле порожнє, виводимо повідомлення
     // і припиняємо виконання функції.

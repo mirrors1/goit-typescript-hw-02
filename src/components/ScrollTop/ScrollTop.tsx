@@ -4,11 +4,11 @@ import s from './ScrollTop.module.css';
 import { IoIosArrowUp } from 'react-icons/io';
 
 const ScrollTop = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   //   const ref = useRef(null);
 
   // Функція для відслідковування прокрутки
-  const handleScroll = () => {
+  const handleScroll = (): void => {
     if (window.scrollY > 300) {
       setIsVisible(true); // Показуємо кнопку, якщо прокрутка більше 300px
     } else {
@@ -25,7 +25,7 @@ const ScrollTop = () => {
   }, []);
 
   // Функція для прокручування до верху
-  const scrollToTop = () => {
+  const scrollToTop = (): void => {
     window.scrollTo({
       top: 0,
       left: 0,
